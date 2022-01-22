@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <!-- Give the page a title -->
+  <title>Sherlock Holmes in London</title>
+  <!-- Add a link to the Leaflet CSS library so you can reference it for styling your map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <!-- Embed Mulish and Merriweather fonts from Google -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Mulish&display=swap" rel="stylesheet">
+  <!-- Path to the Leaflet opacity control plugin css file -->
+  <link href="css/L.Control.Opacity.css" rel="stylesheet" />
+  <!-- For the filter control -->
+  <!-- Add L.EasyButton -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <!-- for filter buttons -->
+  <link rel="stylesheet" href="css/leaflet-tag-filter-button.css">
+  <!-- All the CSS code goes inside the style tags below -->
+  <style>
+    /* style the body */
+    body {
+      margin: 0px;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* style the map */
+    #map {
+      position: absolute;
+      width: 100%;
+      top: 60px;
+      bottom: 0;
+    }
+
+    /* Add banner to header background */
+    header {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Wien_-_Volkskundemuseum-Bibliothek%2C_B%C3%BCcherspeicher.JPG');
+      position: fixed;
+      width: 100%;
+      height: 60px;
+      background-color: #000000;
+      box-shadow: 0px 5px 5px black;
+      z-index: 800;
+    }
+
+    /* Set and style fonts for text in map */
+    h1 {
+      font-family: 'Mulish', sans-serif;
+      font-size: 22px;
+      display: inline-block;
+      color: #f7f4ea;
+      margin-top: 0.10em;
+      margin-bottom: 0.0em;
+      margin-left: 0.5em;
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 11px;
+      display: inline-block;
+      color: #f7f4ea;
+      margin-top: 0.0em;
+      margin-bottom: 0.0em;
+      margin-left: 1.0em;
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    a {
+      color: #f7f4ea;
+    }
+
+    /* style the breaks for different browsers to prevent gaps between line breaks */
+    br {
+      display: block;
+      content: "";
+      border-bottom: 0px solid transparent; // Works in Chrome/Safari
+    }
+    @-moz-document url-prefix() {
+      br {
+        margin-bottom: 0px; // As 'border-bottom' doesn't work in firefox and 'margin-bottom' doesn't work in Chrome/Safari.
+      }
+    }
+
+    .leaflet-popup-content-wrapper {
+      line-height: 10px;
+      border-radius: 2px;
+      height: 10 px;
+      max-height: 400px;
+      max-width: 350px;
+      overflow: auto;
+    }
+
+    .leaflet-popup {
+      position: absolute;
+      text-align: center;
+    }
+
+    .leaflet-popup-content {
+      min-width: 100 px !important;
+    }
+
+    .resize {
+      width: 300px;
+      height: auto;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Header content -->
+  <header>
+    <h1>Sherlock Holmes in London</h1><br><h2>Featuring Charles Booth's <a href="https://davidrumsey.georeferencer.com/maps/b0af04e4-993d-52da-b642-1051e9877e7f/">Descriptive Map of London Poverty 1889</a> and data from T.B. Wheeler's <a href="http://sherlockslondon.com/">The Mapped London of Sherlock Holmes</a></h2>
+  </header>
+  <!-- The map -->
+  <div id="map"></div>
+  <!-- Add a link to the Leaflet JavaScript library so you can reference it for building your map -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <!-- Add a link to the jQuery JavaScript library so you can leverage ajax methods to load your data -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Path to the Leaflet opacity control plugin js file -->
+  <script src="js/L.Control.Opacity.js"></script>
+  <!-- For the filter control -->
+  <!-- Add L.EasyButton -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  <!-- for filter buttons -->
+  <script src="js/leaflet-tag-filter-button.js"></script>
+  <!-- papaparse for bringing in google spreadsheet data -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js "></script>
+  <!-- All JavaScript goes inside the script tags below -->
+  <script>
+    // define map options
+    const mapOptions = {
+      center: [51.507842896935315, -0.11123930420231712], // center the map on the coordinates for London
+      zoom: 14,
+      minZoom: 10,
+      maxZoom: 16,
+    };
+
+    // define the map with the options above
+    const map = L.map("map", mapOptions);
+
+    // add a base map to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      minZoom: 10,
+      maxZoom: 16,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Overlay layers (TMS)
+    const london1889 = L.tileLayer('tiles/{z}/{x}/{y}.png', {
+      tms: true,
+      minZoom: 10,
+      maxZoom: 16,
+    }).addTo(map);
+
+    // Give overlay layers (london1889) a title for the opacity control
+    const overMap = {
+      "London, 1889": london1889
+    };
+
+    // The opacity control
+    L.control.opacity(
+      overMap, {
+        label: "<b>Map Transparency</b>" // Give the control a title
+      }
+    ).addTo(map);
+
+    // Add a scale bar to the map
+    L.control.scale().addTo(map);
+
+    // define the layer group
+    const sherlockPts = L.layerGroup();
+
+    // Add the tag filter button
+    L.control.tagFilterButton({
+      data: ["A Case of Identity", "A Scandal in Bohemia", "A Study in Scarlet", "His Last Bow", "Multiple", "Other", "The Adventure of Charles Augustus Milverton", "The Adventure of Lady Frances Carfax",
+        "The Adventure of Shoscombe Old Place", "The Adventure of the Beryl Coronet", "The Adventure of the Blanched Soldier", "The Adventure of the Blue Carbuncle", "The Adventure of the Bruce-Partington Plans",
+        "The Adventure of the Cardboard Box", "The Adventure of the Copper Beeches", "The Adventure of the Creeping Man", "The Adventure of the Dancing Men", "The Adventure of the Devil's Foot", "The Adventure of the Dying Detective",
+        "The Adventure of the Empty House", "The Adventure of the Engineer's Thumb", "The Adventure of the Golden Pince-Nez", "The Adventure of the Greek Interpreter", "The Adventure of the Illustrious Client",
+        "The Adventure of the Mazarin Stone", "The Adventure of the Missing Three-Quarter", "The Adventure of the Musgrave Ritual", "The Adventure of the Naval Treaty", "The Adventure of the Noble Bachelor",
+        "The Adventure of the Norwood Builder", "The Adventure of the Priory School", "The Adventure of the Red Circle", "The Adventure of the Resident Patient", "The Adventure of the Retired Colourman",
+        "The Adventure of the Second Stain", "The Adventure of the Six Napoleons", "The Adventure of the Solitary Cyclist", "The Adventure of the Speckled Band", "The Adventure of the Stock-Broker's Clerk",
+        "The Adventure of the Sussex Vampire", "The Adventure of the Three Gables", "The Adventure of the Three Garridebs", "The Adventure of the Veiled Lodger", "The Adventure of the Yellow Face", "The Adventure of Wisteria Lodge",
+        "The Final Problem", "The Five Orange Pips", "The Hound of the Baskervilles", "The Illustrious Client", "The Man with the Twisted Lip", "The Musgrave Ritual", "The Problem of Thor Bridge", "The Red-Headed League",
+        "The Sign of the Four", "The Valley of Fear"
+      ],
+      filterOnEveryClick: true,
+      icon: '<img style="font-size:18px; padding-top: 6px;" src="icon/filter.png">'
+    }).addTo(map);
+
+    // retrieve the google sheet
+    $.getJSON(
+      'https://sheets.googleapis.com/v4/spreadsheets/1CT3wnuXk0dObZgLyOgnZZmh_av5Sm2nWlRByVxVkr9k/values/Sheet1?key=AIzaSyD4Q6PhHKmp92OmkavB9pqrXnHJrO8gX3c'
+    ).then(function(sheet) {
+      // define the sheet value results
+      let res = sheet.values;
+      // use papaparse to parse the google doc
+      Papa.parse(Papa.unparse(res), {
+        // make sure it knows the first row is the header
+        header: true,
+        // upon completion...
+        complete: function(results) {
+
+          // define data
+          let data = results.data;
+
+          // for each data point...
+          data.forEach(function(each) {
+
+            // declare an empty string variable
+            var ptLocation = "";
+
+            // if the location is present...
+            if (each.location != null) {
+              // define ptLocation as...
+              var ptLocation = "<br>" + each.location;
+              // otherwise...
+            } else {
+              // make sure it remains an empty string
+              var ptLocation = "";
+            };
+
+            // define the image link on the google sheet
+            var imageLink = each.images;
+
+            // if there is a link provided...
+            if (imageLink != undefined) {
+              // define the image as follows...
+              var imgContent = "<br><img class='resize' src='" + each.images + "'" + "/>" + '<br>Click <a href="' + each.images + '" target="_blank">here</a> to visit the image source.<br>';
+              // otherwise...
+            } else {
+              // leave it blank
+              var imgContent = "";
+            }
+
+            // define the popup content
+            let popUp = (each.place + ptLocation + "<br>Story: " + each.story + "<br><hr>" + each.info + imgContent);
+
+            // declare an empty array for filter tags
+            var tags = [];
+
+            // push the story name from the data points to the tags array
+            tags.push(each.story);
+
+            // define the map markers using the latitude and longitude values
+            let sherlockMarkers = L.marker([each.Y, each.X], {
+              tags: tags,
+              icon: L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              })
+            });
+
+            // bind the popup content to the markers
+            sherlockMarkers.bindPopup(popUp, {
+              closeButton: true,
+            });
+            // open the popup on mouseover
+            sherlockMarkers.on('mouseover', function() {
+              sherlockMarkers.openPopup();
+              sherlockMarkers.setIcon(new L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              }));
+            });
+            // close the popup on mouseout
+            sherlockMarkers.on('mouseout', function() {
+              //sherlockMarkers.closePopup();
+              sherlockMarkers.setIcon(L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+              }));
+            });
+            // add the markers to the layer group
+            sherlockPts.addLayer(sherlockMarkers);
+            // add the layer group to the map
+            sherlockPts.addTo(map);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <!-- Give the page a title -->
+  <title>Sherlock Holmes in London</title>
+  <!-- Add a link to the Leaflet CSS library so you can reference it for styling your map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <!-- Embed Mulish and Merriweather fonts from Google -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Mulish&display=swap" rel="stylesheet">
+  <!-- Path to the Leaflet opacity control plugin css file -->
+  <link href="css/L.Control.Opacity.css" rel="stylesheet" />
+  <!-- For the filter control -->
+  <!-- Add L.EasyButton -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <!-- for filter buttons -->
+  <link rel="stylesheet" href="css/leaflet-tag-filter-button.css">
+  <!-- All the CSS code goes inside the style tags below -->
+  <style>
+    /* style the body */
+    body {
+      margin: 0px;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* style the map */
+    #map {
+      position: absolute;
+      width: 100%;
+      top: 60px;
+      bottom: 0;
+    }
+
+    /* Add banner to header background */
+    header {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/Wien_-_Volkskundemuseum-Bibliothek%2C_B%C3%BCcherspeicher.JPG');
+      position: fixed;
+      width: 100%;
+      height: 60px;
+      background-color: #000000;
+      box-shadow: 0px 5px 5px black;
+      z-index: 800;
+    }
+
+    /* Set and style fonts for text in map */
+    h1 {
+      font-family: 'Mulish', sans-serif;
+      font-size: 22px;
+      display: inline-block;
+      color: #f7f4ea;
+      margin-top: 0.10em;
+      margin-bottom: 0.0em;
+      margin-left: 0.5em;
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 11px;
+      display: inline-block;
+      color: #f7f4ea;
+      margin-top: 0.0em;
+      margin-bottom: 0.0em;
+      margin-left: 1.0em;
+      margin-right: 0;
+      font-weight: normal;
+    }
+
+    a {
+      color: #f7f4ea;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header content -->
+  <header>
+    <h1>Sherlock Holmes in London</h1><br><h2>Featuring Charles Booth's <a href="https://davidrumsey.georeferencer.com/maps/b0af04e4-993d-52da-b642-1051e9877e7f/">Descriptive Map of London Poverty 1889</a> and data from T.B. Wheeler's <a href="http://sherlockslondon.com/">The Mapped London of Sherlock Holmes</a></h2>
+  </header>
+  <!-- The map -->
+  <div id="map"></div>
+  <!-- Add a link to the Leaflet JavaScript library so you can reference it for building your map -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <!-- Add a link to the jQuery JavaScript library so you can leverage ajax methods to load your data -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Path to the Leaflet opacity control plugin js file -->
+  <script src="js/L.Control.Opacity.js"></script>
+  <!-- For the filter control -->
+  <!-- Add L.EasyButton -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  <!-- for filter buttons -->
+  <script src="js/leaflet-tag-filter-button.js"></script>
+  <!-- All JavaScript goes inside the script tags below -->
+  <script>
+    // define map options
+    const mapOptions = {
+      center: [51.507842896935315, -0.11123930420231712], // center the map on the coordinates for London
+      zoom: 14,
+      minZoom: 10,
+      maxZoom: 16,
+    };
+
+    // define the map with the options above
+    const map = L.map("map", mapOptions);
+
+    // add a base map to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      minZoom: 10,
+      maxZoom: 16,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Overlay layers (TMS)
+    const london1889 = L.tileLayer('tiles/{z}/{x}/{y}.png', {
+      tms: true,
+      minZoom: 10,
+      maxZoom: 16,
+    }).addTo(map);
+
+    // Give overlay layers (london1889) a title for the opacity control
+    const overMap = {
+      "London, 1889": london1889
+    };
+
+    // The opacity control
+    L.control.opacity(
+      overMap, {
+        label: "<b>Map Transparency</b>" // Give the control a title
+      }
+    ).addTo(map);
+
+    // Add a scale bar to the map
+    L.control.scale().addTo(map);
+
+    // use jquery to load GeoJSON data
+    $.when(
+      $.getJSON("data/sherlock-points.geojson")
+      // when the files are done loading,
+      // identify them with names and process them through a function
+    ).done(function(sherlockPts) {
+      // initiate a leaflet GeoJSON layer with L.geoJson, feed it the Sherlock data, and add to the map
+      const sholmes = L.geoJson(sherlockPts, {
+        pointToLayer: function(feature, latlng) {
+          var tags = []; // declare an empty array for filter tags
+          tags.push(feature.properties.story); // push story name from the GeoJSON feature properties to tags array
+          return L.marker(latlng, {
+            tags: tags,
+            icon: L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            })
+          });
+        },
+        // for each feature...
+        onEachFeature: function(feature, layer) {
+
+          // declare an empty string variable
+          var ptLocation = "";
+
+          // if the location is present...
+          if (layer.feature.properties.location != null) {
+            // define ptLocation as...
+            var ptLocation = "<br>" + layer.feature.properties.location;
+            // otherwise...
+          } else {
+            // make sure it remains an empty string
+            var ptLocation = "";
+          };
+
+          let popUp = (layer.feature.properties.place + ptLocation + "<br>Story: " + layer.feature.properties.story + "<br><hr>" + layer.feature.properties.info);
+
+          layer.bindPopup(popUp);
+          layer.on('mouseover', function(e) {
+            this.openPopup();
+            e.target.setIcon(new L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            }));
+          });
+          layer.on('mouseout', function(e) {
+            this.closePopup();
+            this.setIcon(L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            }));
+          });
+        }
+      }).addTo(map);
+
+      // add a tag filter button to the map with all of the Sherlock Holmes story titles
+      L.control.tagFilterButton({
+        data: ["A Case of Identity", "A Scandal in Bohemia", "A Study in Scarlet", "His Last Bow", "Multiple", "Other", "The Adventure of Charles Augustus Milverton", "The Adventure of Lady Frances Carfax",
+          "The Adventure of Shoscombe Old Place", "The Adventure of the Beryl Coronet", "The Adventure of the Blanched Soldier", "The Adventure of the Blue Carbuncle", "The Adventure of the Bruce-Partington Plans",
+          "The Adventure of the Cardboard Box", "The Adventure of the Copper Beeches", "The Adventure of the Creeping Man", "The Adventure of the Dancing Men", "The Adventure of the Devil's Foot", "The Adventure of the Dying Detective",
+          "The Adventure of the Empty House", "The Adventure of the Engineer's Thumb", "The Adventure of the Golden Pince-Nez", "The Adventure of the Greek Interpreter", "The Adventure of the Illustrious Client",
+          "The Adventure of the Mazarin Stone", "The Adventure of the Missing Three-Quarter", "The Adventure of the Musgrave Ritual", "The Adventure of the Naval Treaty", "The Adventure of the Noble Bachelor",
+          "The Adventure of the Norwood Builder", "The Adventure of the Priory School", "The Adventure of the Red Circle", "The Adventure of the Resident Patient", "The Adventure of the Retired Colourman",
+          "The Adventure of the Second Stain", "The Adventure of the Six Napoleons", "The Adventure of the Solitary Cyclist", "The Adventure of the Speckled Band", "The Adventure of the Stock-Broker's Clerk",
+          "The Adventure of the Sussex Vampire", "The Adventure of the Three Gables", "The Adventure of the Three Garridebs", "The Adventure of the Veiled Lodger", "The Adventure of the Yellow Face", "The Adventure of Wisteria Lodge",
+          "The Final Problem", "The Five Orange Pips", "The Hound of the Baskervilles", "The Illustrious Client", "The Man with the Twisted Lip", "The Musgrave Ritual", "The Problem of Thor Bridge", "The Red-Headed League",
+          "The Sign of the Four", "The Valley of Fear"
+        ],
+        filterOnEveryClick: true,
+        icon: '<img style="font-size:18px; padding-top: 6px;" src="icon/filter.png">'
+      }).addTo(map);
+
+    });
+  </script>
+</body>
+
+</html>
