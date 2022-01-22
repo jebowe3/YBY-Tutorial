@@ -13,6 +13,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
 - [Required Technology](#required-technology)
 - [Download This Repository](#download-this-repository)
 - [Download the London Basemap](#download-the-london-basemap)
+- [Map the Spreadsheet Data with QGIS](#map-the-spreadsheet-data-with-qgis)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -36,16 +37,18 @@ This tutorial focuses on open-source approaches to digital mapping in the humani
 - [Our GESIS Notebooks Binder](https://notebooks.gesis.org/binder/v2/gh/jebowe3/Text-Analysis-Binder/HEAD)
 
 ## Download This Repository
-Before opening QGIS, you should download this repository and save it to your desktop so that you can work with the files included here. Towards the top of this page, you should see a green button that says, "Code." Click this and select "Download ZIP" from the options as shown in the image below.
-
-![Downloading Repo](images/Repo-download.png)  
-**Figure 01**. How to download a GitHub repository.
-
-Unzip this folder and save it to your desktop.
+Before opening QGIS, you should download this repository and save it to your desktop so that you can work with the files included here. You can download a zip file of this repository from the [link included here](https://github.com/jebowe3/YBY-Tutorial/archive/refs/heads/main.zip). Unzip this folder and save it to your desktop.
 
 ## Download the London Basemap
+Now, you will need to download the georeferenced historic basemap of London. This is a map of London poverty drafted by Charles Booth in 1889. It is contemporaneous to Doyle's Sherlock Holmes series and will provide good historical context to our map.
 
+Download the map from the [link included here](https://drive.google.com/file/d/1udpezkj1y-DIg0kjHLqfcI1swIwLTrwe/view?usp=sharing) and save it inside your unzipped project folder in a new subdirectory called "booth-poverty-map" as shown below.
 
-Within the project folder, you will find a file called "SHERLOCK_HOLMES_LONDON.csv" inside the "spreadsheet" folder. If you open this file, you will see that it contains six columns (place, location, info, X, Y, and story). For mapping this spreadsheet, the important information is in the X and Y columns.
+![Saving the Basemap](images/basemap-save.png)  
+**Figure 01**. Saving the Basemap.
+
+## Map the Spreadsheet Data with QGIS
+
+Within the unzipped project folder, you will find a file called "SHERLOCK_HOLMES_LONDON.csv" inside the "spreadsheet" folder. If you open this file, you will see that it contains six columns (place, location, info, X, Y, and story). For mapping this spreadsheet, the important information is in the X and Y columns.
 
 Every map is essentially a chart with X and Y axes (you may also see Z for elevation). Think of a map oriented with the top of the sheet at north. As the X axis moves from left to right, the X column stores longitude data (degrees east or west of Greenwich, England). As the Y axis moves from bottom to top, this column stores the latitude information (degrees north or south of the Equator). Close the csv file and open QGIS.
