@@ -20,6 +20,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Adding a Georeferenced Historic Basemap](#adding-a-georeferenced-historic-basemap)
 - [Leaflet JavaScript for Web Mapping](#leaflet-javascript-for-web-mapping)
   - [Export a GeoJSON File for Web Mapping](#export-a-geojson-file-for-web-mapping)
+  - [Download Atom-Live-Server Package](#download-atom-live-server-package)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -113,3 +114,21 @@ Return to the map edit window, right click the points layer, and click "Export" 
 
 ![Export Sherlock Points](images/export-sherlock-points.png)  
 **Figure 09**. Export all of the Sherlock points.
+
+### Download Atom-Live-Server Package
+Now we are ready to open our "leaflet-map" folder and do some minor editing in Atom. Open the repository that you downloaded to your desktop. Locate the folder called "leaflet-map." Drag and drop this entire folder over the green Atom icon on your desktop. This should open all of the web map components within an Atom text edit session. In the bar at the left, open the file called "index.html" so that you can see all of the code behind the web map. Your screen should look like this:
+
+![Editing in Atom](images/index-html-atom.png)  
+**Figure 10**. Editing in Atom.
+
+The first thing that you will want to do so that you can check your progress is to download an Atom package called "atom-live-server." From the option in the bar at the top, click "Atom" and "Preferences." From the options that appear on the left, choose "Install," type "atom-live-server" in the search bar, and click "Install" on the first result. On my screen in the example below, you will see "Uninstall" because I have already installed this package.
+
+![Installing Atom-Live-Server](images/install-liveserver.png)  
+**Figure 11**. Installing atom-live-server.
+
+Now you can check the progress of edits to your web map with a locally hosted server. To test it out, click "Packages" from the options in the bar at the top. Select "atom-live-server" and "Start server." This will open the map in your web browser.
+
+![Initial Live Server Map](images/live-server-init-map.png)  
+**Figure 12**. The initial web map in atom-live-server.
+
+The map should look like the image above. You will notice that one interactive feature is already on the map. In the top right corner, there is a slider control that changes the opacity value of the historic base map tiles so that you can see the contemporary map of London underneath.
