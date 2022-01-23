@@ -13,7 +13,13 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
 - [Required Technology](#required-technology)
 - [Download This Repository](#download-this-repository)
 - [Download the London Basemap](#download-the-london-basemap)
-- [Map the Spreadsheet Data with QGIS](#map-the-spreadsheet-data-with-qgis)
+- [Using QGIS](#using-qgis)
+  - [Map the Spreadsheet Data with QGIS](#map-the-spreadsheet-data-with-qgis)
+  - [Adding a Basemap](#adding-a-basemap)
+  - [Changing Projections](#changing-projections)
+  - [Adding a Georeferenced Historic Basemap](#adding-a-georeferenced-historic-basemap)
+- [Leaflet JavaScript for Web Mapping](#leaflet-javascript-for-web-mapping)
+  - [Export a GeoJSON File for Web Mapping](#export-a-geojson-file-for-web-mapping)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -47,7 +53,9 @@ Download the map from the [link included here](https://drive.google.com/file/d/1
 ![Saving the Basemap](images/basemap-save.png)  
 **Figure 01**. Saving the Basemap.
 
-## Map the Spreadsheet Data with QGIS
+## Using QGIS
+
+### Map the Spreadsheet Data with QGIS
 
 Within the unzipped project folder, you will find a file called "SHERLOCK_HOLMES_LONDON.csv" inside the "spreadsheet" folder. If you open this file, you will see that it contains six columns (place, location, info, X, Y, and story). For mapping this spreadsheet, the important information is in the X and Y columns.
 
@@ -62,3 +70,46 @@ This will open a form. In the box next to "File name," include the path to the c
 
 ![Add Delimited Text Layer Form](images/Upload-csv-2.png)  
 **Figure 03**. How to fill out the form to add a delimited text layer.
+
+### Adding a Basemap
+After clicking add, you should see a collection of points on a white background in your map edit window. Not being sure if these points are actually in London, we need a basemap for visual verification. You can add one by clicking "XYZ Tiles" in the browser window at the top left corner. Select "OpenStreetMap" and drag and drop this into your map window. Next, in the layers window, make sure to drag the basemap under the Sherlock points.
+
+![Add Basemap](images/points-over-base.png)  
+**Figure 04**. Add a basemap and place it beneath the points.
+
+### Changing Projections
+Things look good, but if you look at maps for a living, this map looks a little squished. This illustrates the importance of projections. Every map is an abstraction of the Earth's natural curvature to a flat surface, so some projections are better than others for particular locations. In this case, it would be good to use a projection developed specifically for London, such as EPSG:102400 (London Survey Grid). In the bottom right corner of your window, you should see a little button that looks like a globe wearing a hat, followed by an EPSG code. This is where you can change your projection. Click on this and, in the form that opens, type "102400" into the "Filter" box. You should now see "London_Survey_Grid" appear in the box beneath "Predefined Coordinate Reference Systems." Click it and then click "OK." After you change the projection, your map should be a little easier on the eyes.
+
+![Change Projection](images/change-projection.png)  
+**Figure 05**. How to change the projection.
+
+GIS users are trained to think of mappable data in two main categories - vector and raster. Vector data consist of distinct points, lines, and polygons. The spreadsheet data that you have mapped is one example of vector data. In contrast, raster data consist of continuous pixels. A scanned map is an example of raster data. We are now going to add some new raster data to our map.
+
+### Adding a Georeferenced Historic Basemap
+Adding an historic basemap to your project is a nice way to give your map historical context. Using GIS software, you can take any scanned map and "rubber sheet" it to your project in a painstaking process known as georeferencing. Essentially, this is a process of placing a series of pins on your scanned map and linking them to a series of matching pins in your map edit window. After you have done this, you can run a tool in GIS to assign coordinates to each pixel on your scanned map. Fortunately, the map you downloaded and placed inside the "booth-poverty-map" folder is already georeferenced.
+
+Similar to how you added the csv data, click "Layer" in the bar at the top of the screen. Then, click "Add Layer" and "Add Raster Layer." This will open a form.
+
+![Adding a Raster Layer](images/Add-raster.png)  
+**Figure 06**. How to add a raster layer.
+
+In the form that opens, navigate to and select the file called "Booth_Descriptive_Map_of_London_Poverty_1889.tif" located in the repository you downloaded. Then, click "Add."
+
+![Add Raster Layer Form](images/Raster-form.png)  
+**Figure 07**. The form for adding a raster layer.
+
+After adding the georefenced raster, you should see Booth's 1889 map of London poverty in your map edit window. Again, make sure to drag this map beneath the points in the layers window. The result should look something like this:
+
+![Booth Map](images/Booth-map-in-QGIS.png)  
+**Figure 08**. The Booth map in QGIS.
+
+This gives you a good idea of how to use QGIS to plot spreadsheet data over a scanned historic map. If you are interested in learning how to export this as a static map in pdf format, please see [these in-depth instructions](https://jebowe3.github.io/DH-Mapping/#step-7-how-to-make-a-static-map). If you want to see how to export these points in JavaScript Object Notation format so that the data can be used in an interactive web map, read on.
+
+## Leaflet JavaScript for Web Mapping
+One of the great things about QGIS as opposed to ArcGIS (aside from it being free and working in both Windows and MacOS) is that it works will with file formats that are readily accessible in JavaScript web mapping. Without needing to convert, QGIS can read, edit, and save GeoJSON files. A GeoJSON is a type of JavaScript Object Notation file that carries geographic information and feature data, just like a shapefile package, but within one convenient file. In the following steps, we will see how to export our points to a GeoJSON and how to use this file in an interactive web map.
+
+### Export a GeoJSON File for Web Mapping
+Return to the map edit window, right click the points layer, and click "Export" and "Save Features As." Make sure you export in GeoJSON format. Click the three dots next to "File name," save as "sherlock_points," and make sure to save the file inside the "data" folder within the "leaflet-map" folder inside the repository that you downloaded to your desktop. Finally, set coordinate precision to 5 decimal points. You could go with the default 15, but that level of coordinate precision is generally unnecessary and simply makes for heavier files.
+
+![Export Sherlock Points](images/export-sherlock-points.png)  
+**Figure 09**. Export all of the Sherlock points.
