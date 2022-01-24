@@ -21,6 +21,9 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
 - [Leaflet JavaScript for Web Mapping](#leaflet-javascript-for-web-mapping)
   - [Export a GeoJSON File for Web Mapping](#export-a-geojson-file-for-web-mapping)
   - [Download Atom-Live-Server Package](#download-atom-live-server-package)
+  - [Add the Sherlock GeoJSON to a Web Map Using Atom](#add-the-sherlock-geojson-to-a-web-map-using-atom)
+  - [Crowdsourced Web Mapping with Google Sheets](#crowdsourced-web-mapping-with-google-sheets)
+- [Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi](#text-analysis-geolocation-and-network-mapping-with-python-qgis-and-gephi)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -132,3 +135,76 @@ Now you can check the progress of edits to your web map with a locally hosted se
 **Figure 12**. The initial web map in atom-live-server.
 
 The map should look like the image above. You will notice that one interactive feature is already on the map. In the top right corner, there is a slider control that changes the opacity value of the historic base map tiles so that you can see the contemporary map of London underneath.
+
+### Add the Sherlock GeoJSON to a Web Map Using Atom
+You'll notice that there are no points on the map. That is because we have not directed the JavaScript within the index.html file to the GeoJSON file holding the points. Remember that the local path to the Sherlock points is 'data/sherlock_points.geojson' and that we will need to add this path to the index.html file. Scroll through the index.html file until you see the following lines of JavaScript:
+
+```js
+// use jquery to load GeoJSON data
+$.when(
+  $.getJSON(/* 'ADD PATH TO GEOJSON DATA HERE' */)
+  // when the files are done loading,
+  // identify them with names and process them through a function
+).done(function(sherlockPts) {
+  // more JavaScript here
+});
+```
+
+Replace /* 'ADD PATH TO GEOJSON DATA HERE' */ with 'data/sherlock_points.geojson' so that those lines of JavaScript now look like this:
+
+```js
+// use jquery to load GeoJSON data
+$.when(
+  $.getJSON('data/sherlock_points.geojson')
+  // when the files are done loading,
+  // identify them with names and process them through a function
+).done(function(sherlockPts) {
+  // more JavaScript here
+});
+```
+
+Now, save your edits to the index.html file and refresh your web map in atom-live-server. You should notice a lot of blue markers now appear. Hover over them and you will see detailed descriptions of each points. Also notice that there is a filter button under the zoom control in the top left corner. If you click on this, you will see that you can filter the points by story name.
+
+![Finished Live Server Map](images/web-map-finished.png)  
+**Figure 13**. The finished web map in atom-live-server.
+
+While this walkthrough is intended as a quick introduction to what is possible with interactive web mapping, you may be wondering what the all of the code in the index.html file is doing. For a more thorough explanation, please [click this link](https://jebowe3.github.io/DH-Mapping/#step-4-explanation-of-the-code-behind-the-web-map).
+
+### Crowdsourced Web Mapping with Google Sheets
+With a few slight changes to our index.html code and a JavaScript library called PapaParse, we can parse a Google Sheet directly and add this content to map markers. Within the repository you downloaded, there is another [html file](https://github.com/jebowe3/YBY-Tutorial/blob/main/leaflet-map/googlesheet-index.html) at 'leaflet-map/googlesheet-index.html' that generates markers and popup content from our shared [Google Sheets spreadsheet](https://docs.google.com/spreadsheets/d/1CT3wnuXk0dObZgLyOgnZZmh_av5Sm2nWlRByVxVkr9k/edit?usp=sharing).
+
+In Atom, open the googlesheet-index.html file and take a quick look at the code. We are going to point our browser to this html file instead of the index.html file we viewed previously.
+
+This time, run atom-live-server again, but add 'googlesheet-index.html' to the url in the browser address bar. You should see a similar map load in your browser, with one important distinction. Notice how the first entry in our Google Sheets document contains an image link in a column titled "images." If you go back to the map in atom-live-server, filter for The Five Orange Pips in the story filter and click on the marker in the city center for Lloyd's Register, you will notice that this popup contains the image from that web link.
+
+![Popup with Image](images/popup-with-image.png)  
+**Figure 14**. A popup with an image.
+
+Now, let's experiment with crowdsourcing popup image content using [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page). Return to our shared [Google Sheets spreadsheet](https://docs.google.com/spreadsheets/d/1CT3wnuXk0dObZgLyOgnZZmh_av5Sm2nWlRByVxVkr9k/edit?usp=sharing) and find an entry missing an image url in the "images" column for which there is likely to be an image (a train station, cathedral, institution, etc.).
+
+![Empty Entry](images/empty-entry.png)  
+**Figure 15**. An empty entry in the images column.
+
+Next, search for an image of that location at [Wikimedia Commons](https://commons.wikimedia.org/wiki/Main_Page) as shown below.
+
+![Image Search](images/search-images.png)  
+**Figure 16**. Search for an image at Wikimedia.
+
+Now, right click on the image you want to use and select "Open Link in New Tab" as shown below.
+
+![Open Link in New Tab](images/new-tab.png)  
+**Figure 17**. Open link in new tab.
+
+In the new tab, to the right of the image, you will see an option to "use this file on the web". Click this and copy the link from the box under "File URL" as shown below.
+
+![Copy Image URL](images/image-url.png)  
+**Figure 18**. Copy the image url.
+
+Paste this link into the empty entry in the images column of the shared google spreadsheet. Return to your googlesheet-index.html in atom-live-server and make sure to refresh the page. Now, when you hover over the marker for the image you just entered, you should see your added image in the popup content (it may take a moment).
+
+![Image Added](images/image-added.png)  
+**Figure 19**. Image added to popup.
+
+Now that you have seen some of the potential for JavaScript in interactive web mapping, let's take a look at how Python scripting can help us to analyze and map texts geographically and conceptually.
+
+## Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi
