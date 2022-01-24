@@ -24,6 +24,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Add the Sherlock GeoJSON to a Web Map Using Atom](#add-the-sherlock-geojson-to-a-web-map-using-atom)
   - [Crowdsourced Web Mapping with Google Sheets](#crowdsourced-web-mapping-with-google-sheets)
 - [Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi](#text-analysis-geolocation-and-network-mapping-with-python-qgis-and-gephi)
+  - [Open the ipynb File in Jupyter Notebook](#open-the-ipynb-file-in-jupyter-notebook)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -208,3 +209,22 @@ Paste this link into the empty entry in the images column of the shared google s
 Now that you have seen some of the potential for JavaScript in interactive web mapping, let's take a look at how Python scripting can help us to analyze and map texts geographically and conceptually.
 
 ## Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi
+If you foresee doing a lot of Python scripting in the future, it will be helpful to download [Anaconda Navigator](https://www.anaconda.com/products/individual) for setting up environments where you can test and run Python code inside a Jupyter Notebook file. For in-depth instructions on how to do this, [click this link](https://jebowe3.github.io/DH-Mapping/#download-anaconda-navigator).
+
+However, in this example, we will run a Jupyter Notebook file within a pre-established environment in a [GESIS Notebooks Binder](https://notebooks.gesis.org/binder/) in our web browser. You can open this by [clicking this link](https://notebooks.gesis.org/binder/v2/gh/jebowe3/Text-Analysis-Binder/HEAD).
+
+### Open the ipynb File in Jupyter Notebook
+After the binder finishes loading in your browser, click and open the "place-analysis.ipynb" file in the menu on the left side of the screen.
+
+![Open ipynb File](images/open-ipynb.png)  
+**Figure 20**. Open the ipynb file.
+
+Follow the steps listed in the opened file, making sure to read through the explanations before running each block of Python code. The code included in the ipynb file will do the following:
+
+1. Download and save a txt file containing The Adventures of Sherlock Holmes
+2. Make and save a Word2Vec model for text analysis
+3. Create and save a word cloud of the the top 50 important words in the text
+4. Create and save a word cloud of the the top 50 locations mentioned in the text
+5. Save a csv file of all mentioned locations along with frequency counts for each
+6. Save a revised csv file of cleaned and corrected locations along with frequency counts and coordinates for each
+7. Generate a gexf file for mapping networks between the 50 most common important words from the text and the twenty most similar words to each
