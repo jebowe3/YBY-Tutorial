@@ -265,3 +265,41 @@ In the dialog box, select the "adv-sherlock-places-geocoded.csv" file next to "F
 **Figure 25**. Add Delimited Text Layer - Step 2.
 
 Third, let's make these points appear as proportional circles. Find the layer in the "Layers" table of contents in the lower lefthand corner and right click. Select "Properties" and choose "Symbology" from the options at left. Instead of "Single symbol", choose "Graduated". For "Column", choose "frequency". For "Method", select "Size". Next to "Mode", choose "Natural Breaks (Jenks)" and click "Classify". Then, click "OK".
+
+![Make Proportional Circles](images/make-prop-circles.png)
+**Figure 26**. Make Proportional Circles.
+
+After doing that, your map window should like similar to the following image. If you like the results, you can proceed to the layout window and finalize a pdf for exporting. You can see how to do this with [these in-depth instructions](https://jebowe3.github.io/DH-Mapping/#step-7-how-to-make-a-static-map).
+
+![Proportional Circles Map](images/prop-circs.png)
+**Figure 27**. Proportional Circles Map.
+
+Now, let's try a heat map! In you properties settings, choose "Heatmap" in place of "Graduated". Use "Reds" for the color ramp and set the radius and maximum values to 10. You can experiment with different values to see how they change the results at different zoom levels. For "Weight points by", choose "frequency" and then move the rendering quality bar to "Best". Finally, maximize the "Layer Rendering" dialog at the bottom, set the opacity to 33.3% and click "OK".
+
+![Making a Heat Map](images/heat-map-settings.png)
+**Figure 28**. Making a Heat Map.
+
+Returning to your map screen, you should see something like the image below. Again, if you like this, you can export a pdf in the layout window.
+
+![Heat Map](images/heat-map.png)
+**Figure 29**. Heat Map.
+
+Finally, let's do some point in polygon analysis. Our goal is to total the frequency values for all points located within each nation and color code the result in a choropleth map. To do this, first let's turn off the Dark Matter basemap. Next, drag and drop the "nations.geojson" file into the map window.
+
+Now, navigate to Processing > Toolbox and search for a tool called "Join attributes by location (summary)". In the dialog box, identify "nations" as the input layer and "adv-sherlock-places-geocoded" as the join layer. Select "contains" for the geometric predicate. Under "fields to summarize", select "frequency" and select "sum" under "summaries to calculate". Finally, click "Run". Use the image below for guidance.
+
+![Point in Polygon Settings](images/summary-settings.png)
+**Figure 30**. Point in Polygon Settings.
+
+Next, in the Layers table of contents, turn off every layer except the new "Joined layer". Right click this layer and choose "Open Attribute Table". Click the "Open field calculator" button. Check "Update existing field" and choose "frequency_sum" from the dropdown menu. In the expression box, type:
+
+if ("frequency_sum" is null, 0, "frequency_sum")
+
+Click "OK". Next, click save edits and close the edit session by clicking the box that contains a pencil.
+
+Now, close the attribute table and right click the joined layer once again. This time, select "Properties". From the dropdown menu options, choose "Graduated". Then, select "frequency_sum" for the column to be analyzed. Next, choose "Blues" for the color ramp. Next, select "Natural Breaks (Jenks)" for the mode of classification, click "Classify" and then click "OK". Your map should look similar to the image below, but you can certainly play around with some more appropriate global equal area projections before finalizing and exporting to a pdf.
+
+![Choropleth Frequency Map](images/world-choropleth.png)
+**Figure 31**. Choropleth Frequency Map.
+
+Looking at these three maps, what could you say about Sherlock's global sense of place? What might influence his familiarity with particular geographic locations, regions, and countries? How is it constricted and how is it broader than expected?
