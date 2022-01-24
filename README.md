@@ -25,6 +25,8 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Crowdsourced Web Mapping with Google Sheets](#crowdsourced-web-mapping-with-google-sheets)
 - [Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi](#text-analysis-geolocation-and-network-mapping-with-python-qgis-and-gephi)
   - [Open the ipynb File in Jupyter Notebook](#open-the-ipynb-file-in-jupyter-notebook)
+  - [Save Required Files in the Project Folder](#save-required-files-in-the-project-folder)
+  - [Map Locations in The Adventures of Sherlock Holmes with QGIS](#map-locations-in-the-adventures-of-sherlock-holmes-with-qgis)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -228,3 +230,20 @@ Follow the steps listed in the opened file, making sure to read through the expl
 5. Save a csv file of all mentioned locations along with frequency counts for each
 6. Save a revised csv file of cleaned and corrected locations along with frequency counts and coordinates for each
 7. Generate a gexf file for mapping networks between the 50 most common important words from the text and the twenty most similar words to each
+
+### Save Required Files in the Project Folder
+After running the code, you should see several new folders in the table of contents at left. We will use some of the contents from the csv and gephi folders in the following steps, so we need to get these files into our desktop project folder.
+
+![New Folders](images/new-contents.png)  
+**Figure 21**. New folders in Jupyter Notebook.
+
+First, create a new folder inside your desktop project folder called "assets" to hold these files. Then, click and open "csv" in Jupyter Notebook. Right click "adv-sherlock-places-geocoded.csv" and click "Download" in the dropdown menu as shown below. Place this file inside your newly created "assets" folder.
+
+![Download CSV](images/download-csv.png)  
+**Figure 22**. Download the geocoded locations.
+
+Now, follow the same process for the "adv-sherlock.gexf" file in the "gephi" folder, saving this in the "assets" folder as well.
+
+Now, we are ready to map the locations our Python code has retrieved and geocoded from the text of The Adventures of Sherlock Holmes.
+
+### Map Locations in The Adventures of Sherlock Holmes with QGIS

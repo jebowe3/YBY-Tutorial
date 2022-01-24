@@ -1,0 +1,134 @@
+name, frequency, lat, lng
+London, 35, 51.507408, -0.127699
+Baker Street, 24, 51.523220, -0.157780
+England, 16, 52.592735, -1.458628
+United States, 13, 39.398703, -99.414619
+Reading England, 7, 51.453803, -0.973739
+Horsham, 7, 51.062094, -0.328078
+Winchester, 7, 51.061757, -1.310992
+Europe, 6, 48.690960, 9.140620
+Great Scotland Yard, 6, 51.506344, -0.125753
+France, 6, 46.559417, 2.550540
+Czech Republic, 5, 49.738854, 15.331770
+Paddington Station London, 5, 51.517840, -0.180850
+Bristol, 5, 51.453132, -2.600983
+Savannah, 5, 32.080910, -81.091190
+Brixton Road London, 5, 51.471725, -0.112655
+San Francisco, 5, 37.777120, -122.419640
+China, 4, 36.567348, 103.930027
+Dundee, 4, 56.458396, -2.973675
+Gravesend, 4, 51.442515, 0.369396
+Surrey England, 4, 51.247855, -0.420563
+Serpentine Avenue London, 3, 51.504459, -0.155646
+Ballarat, 3, -37.562680, 143.847090
+Florida, 3, 28.566045, -81.688649
+Covent Garden London England, 3, 51.511625, -0.122485
+Leatherhead, 3, 51.296158, -0.331096
+Berkshire, 3, 51.450514, -1.071812
+Hampshire, 3, 51.062649, -1.287504
+India, 3, 23.379380, 79.443327
+California, 3, 36.374106, -119.270230
+Holland, 2, 52.249375, 5.616126
+Regent Street London England, 2, 51.488631, -0.282630
+Oxford Street London, 2, 51.515260, -0.142270
+Leadenhall Street London, 2, 51.513327, -0.079077
+Herefordshire, 2, 52.103674, -2.745115
+Australia, 2, -25.709932, 134.484031
+Victoria Australia, 2, -36.848231, 144.299544
+Hatherley Farm Gloucester England, 2, 51.852676, -2.232454
+Pondicherry, 2, 11.929930, 79.824700
+Georgia, 2, 32.648325, -83.444534
+Atlantic, 2, 41.404000, -95.013860
+Bow Street London England, 2, 51.548454, 0.006108
+Goodge Street, 2, 51.520495, -0.134628
+Queen Victoria Street London England, 2, 51.513285, -0.089978
+Lancaster Gate London England, 2, 51.511516, -0.179896
+West End London England, 2, 51.514140, -0.155100
+Philadelphia, 2, 39.952220, -75.162180
+High Street Winchester England, 2, 51.063666, -1.319124
+Southampton, 2, 50.904882, -1.404304
+Odessa, 1, 46.472500, 30.737110
+Trincomalee, 1, 8.577430, 81.224610
+Karlovy Vary, 1, 50.228400, 12.865310
+Prague, 1, 50.079130, 14.433020
+Warsaw, 1, 52.235600, 21.010370
+New Jersey, 1, 39.613348, -74.728565
+Charing Cross Station London, 1, 51.509720, -0.125300
+Lebanon Pennsylvania, 1, 40.330490, -76.425880
+Pennsylvania, 1, 40.896512, -77.838751
+Fleet Street London, 1, 51.513730, -0.111640
+Aldersgate London England, 1, 51.515724, -0.097141
+Kensington London England, 1, 51.491180, -0.207040
+Agra, 1, 27.192180, 78.000070
+Oxford, 1, 51.751983, -1.257629
+Scotland, 1, 56.840021, -4.181278
+Cornwall England, 1, 50.406198, -4.823095
+Farringdon Street London England, 1, 51.517714, -0.105117
+Auckland, 1, -36.848379, 174.764382
+New Zealand, 1, -42.287234, 172.343433
+Bordeaux, 1, 44.836700, -0.581070
+St. Saviour’s Church Chalk Farm Station London, 1, 51.509442, -0.148395
+King’s Cross, 1, 51.536947, -0.119118
+Lyon, 1, 45.759170, 4.829650
+Andover, 1, 51.207500, -1.479181
+The Hague, 1, 52.084090, 4.317320
+Afghanistan, 1, 33.831137, 66.024712
+Swindon, 1, 51.561533, -1.785446
+Hereford, 1, 52.055988, -2.717552
+Rotterdam, 1, 51.914380, 4.487160
+Melbourne, 1, -37.817390, 144.967510
+Camberwell London, 1, 51.470065, -0.085645
+Coventry, 1, 52.407724, -1.506848
+Sussex England, 1, 50.916670, -0.083330
+East London England, 1, 51.523320, -0.038880
+Tennessee, 1, 35.843003, -86.343051
+Louisiana, 1, 30.185846, -91.426420
+Hamer South Carolina, 1, 34.486380, -79.321840
+Waterloo Bridge London England, 1, 51.507377, -0.115810
+Waterloo Station London England, 1, 51.502820, -0.111100
+Isle of Wight, 1, 50.675172, -1.298845
+London Bridge England, 1, 51.508410, -0.087580
+Paul’s Wharf London, 1, 51.510859, -0.102263
+Kent England, 1, 51.234532, 0.720795
+Cannon Street London, 1, 51.512550, -0.094480
+Middlesex England, 1, 51.500000, -0.416670
+London Road London, 1, 51.406797, -0.120966
+Waterloo Bridge Road, 1, 53.483502, -3.039768
+Wellington Street London England, 1, 51.489329, 0.064901
+River Thames England, 1, 51.497630, 0.508120
+Tottenham Court Road, 1, 51.516590, -0.130830
+Amoy China, 1, 24.479790, 118.081870
+Harley Street London England, 1, 51.521019, -0.147877
+Wigmore Street London England, 1, 51.516990, -0.145150
+Bloomsbury London England, 1, 51.516860, -0.125850
+Calcutta, 1, 22.570600, 88.371310
+Crewe, 1, 53.095046, -2.441760
+Wilton, 1, 51.079973, -1.863768
+Oxfordshire, 1, 51.765718, -1.322258
+Grosvenor Square London England, 1, 51.510858, -0.151480
+Great Britain, 1, 53.408387, -1.969560
+Westbury House, 1, 51.221840, 1.399830
+Balmoral, 1, 57.040680, -3.229880
+Birchmoor, 1, 52.611181, -1.628752
+Petersfield, 1, 51.003945, -0.937691
+Pacific Slope, 1, 32.075670, -104.704950
+Hyde Park London England, 1, 51.508280, -0.161390
+Aberdeen, 1, 57.149835, -2.093767
+Munich, 1, 48.136410, 11.577540
+Trafalgar Square London England, 1, 51.507700, -0.127350
+Rocky Mountains, 1, 43.358260, -110.917430
+Montana, 1, 47.033499, -109.645068
+Arizona, 1, 34.293016, -111.664754
+New Mexico, 1, 34.421327, -106.108404
+Paris, 1, 48.857170, 2.341400
+Northumberland Avenue London England, 1, 51.565385, 0.038313
+Metropolitan Station Buildings London England, 1, 51.493372, -0.224019
+City of London, 1, 51.514373, -0.092260
+Streatham London, 1, 51.426020, -0.131080
+Montague Place London England, 1, 51.520862, -0.127007
+Halifax, 1, 44.645480, -63.576550
+Nova Scotia, 1, 45.766640, -61.631830
+Aldershot, 1, 51.249887, -0.761668
+Southampton Road London England, 1, 51.553080, -0.158090
+Mauritius, 1, -20.283556, 57.571817
+Walsall, 1, 52.586237, -1.980336
