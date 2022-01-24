@@ -27,6 +27,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Open the ipynb File in Jupyter Notebook](#open-the-ipynb-file-in-jupyter-notebook)
   - [Save Required Files in the Project Folder](#save-required-files-in-the-project-folder)
   - [Map Locations in The Adventures of Sherlock Holmes with QGIS](#map-locations-in-the-adventures-of-sherlock-holmes-with-qgis)
+  - [Map a Network of Word Associations from The Adventures of Sherlock Holmes with Gephi](#map-a-network-of-word-associations-from-the-adventures-of-sherlock-holmes-with-gephi)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -303,3 +304,56 @@ Now, close the attribute table and right click the joined layer once again. This
 **Figure 31**. Choropleth Frequency Map.
 
 Looking at these three maps, what could you say about Sherlock's global sense of place? What might influence his familiarity with particular geographic locations, regions, and countries? How is it constricted and how is it broader than expected?
+
+### Map a Network of Word Associations from The Adventures of Sherlock Holmes with Gephi
+
+Now, we will load the adv-sherlock.gexf file from the "assets" subdirectory in the Gephi software you downloaded earlier. With this file, we will perform a visual network analysis to map associations between our words of interest from the text and their most similar relatives previously identified by our Word2Vec model.
+
+Locate Gephi in your applications and open the software. Now, click "New Project". From the options in the top bar, choose File > Open and locate your adv-sherlock.gexf file in your project folder. Click "Open".
+
+![Open the gexf File](images/gephi-open-gexf.png)
+**Figure 32**. Open the gexf File.
+
+Choose a "Directed" Graph Type and select "Append to existing workspace". Click "OK".
+
+![Import Settings](images/gephi-import.png)
+**Figure 33**. Import Settings.
+
+Now, make sure you are in the "Overview" view. From the options at right, click "Run" next to "Modularity". In the settings, choose "Randomize" and "Use weights" and click "OK". You can close the resulting modularity report. This will classify our nodes cluster into new groups of closely associated words, called "communities".
+
+![Modularity Settings](images/gephi-modularity.png)
+**Figure 34**. Modularity Settings.
+
+Now, we will color code each node by its community. As shown below, under "Appearance", select Nodes > Partition > Modularity Class and click "Apply".
+
+![Appearance Settings](images/gephi-appearance.png)
+**Figure 35**. Appearance Settings.
+
+Next, we will rank each node proportionally. Again, under "Appearance", select Nodes > Ranking > Degree and click "Apply". Follow the steps shown below.
+
+![Node Ranking](images/gephi-node-ranking.png)
+**Figure 36**. Node Ranking.
+
+As you can see, this network is too crowded to be useful as a visualization. We need to change the layout of the network to avoid overlapping nodes and edges to improve legibility.
+
+Follow the image below. Under the "Layout" options, choose "ForceAtlas 2". Then, under "Behavior Alternatives", choose "Dissuade Hubs", "LinLog mode", and "Prevent Overlap". Finally, click "Run". When you click "Run", you will notice the network begin to change shape. You will also notice that the "Run" button has changed into a "Stop" button. As soon as you notice the changes to the layout slowing down, you can click "Stop" to freeze the network.
+
+![Changing the Layout Options](images/gephi-layout-options.png)
+
+**Figure 37**. Changing the Layout Options.
+
+Zoom out and you will notice that the network is much less tangled and dense. However, we still do not know which words are represented by these nodes.
+
+Click "Preview" from the options at the top of the window. Next, under "Preview Settings", change "Default" to "Text outline" and click "Refresh". The window should populate with a labelled network, as shown below.
+
+![Changing the Preview Settings](images/gephi-preview-settings-1.png)
+**Figure 38**. Changing the Preview Settings.
+
+Let's experiment with these settings some more to improve legibility. Under "Nodes", set the opacity to 0. Under "Node Labels", set font to Arial 18 Plain, color to parent, and outline size to 2. Under "Edges", select "Rescale weight" and set the minimum to 0.1 and the maximum to 4. Finally, click "Refresh". Try manipulating these settings until you are satisfied with the results.
+
+![Resetting the Preview Settings](images/gephi-reset-preview-settings.png)
+**Figure 39**. Resetting the Preview Settings.
+
+Finally, we can export a pdf. Notice that there is an export button at the very bottom of the preview settings. Click this and export a pdf to your project folder.
+
+Take a look at the results. How might this mapped network help us to understand The Adventures of Sherlock Holmes? What themes from the text might we be able to glean from this visualization.
