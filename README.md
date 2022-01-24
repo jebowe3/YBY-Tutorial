@@ -28,6 +28,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Save Required Files in the Project Folder](#save-required-files-in-the-project-folder)
   - [Map Locations in The Adventures of Sherlock Holmes with QGIS](#map-locations-in-the-adventures-of-sherlock-holmes-with-qgis)
   - [Map a Network of Word Associations from The Adventures of Sherlock Holmes with Gephi](#map-a-network-of-word-associations-from-the-adventures-of-sherlock-holmes-with-gephi)
+- [Conclusion](#conclusion)
 
 ## Introduction
 This tutorial is an overview of digital mapping in the humanities. Through the steps provided here, you will gain a cursory introduction in how to:
@@ -209,6 +210,8 @@ Paste this link into the empty entry in the images column of the shared google s
 ![Image Added](images/image-added.png)  
 **Figure 19**. Image added to popup.
 
+While you have made two maps that you can host locally on your computer, you may be wondering how you can host and publish these maps on the web. GitHub is a nice solution where you can share your code and publish your maps. If you are interested in doing this, please [take a look at the link here](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+
 Now that you have seen some of the potential for JavaScript in interactive web mapping, let's take a look at how Python scripting can help us to analyze and map texts geographically and conceptually.
 
 ## Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi
@@ -357,3 +360,6 @@ Let's experiment with these settings some more to improve legibility. Under "Nod
 Finally, we can export a pdf. Notice that there is an export button at the very bottom of the preview settings. Click this and export a pdf to your project folder.
 
 Take a look at the results. This network maps connections between our selected words of interest and their most similar peers in the text. More connections between words generally brings them closer together in the network diagram. However, words without connections are often farther apart. Two words with a very strong connection to one another are symbolized with a wider line (edge). Communities, or subsets of nodes within the graph with denser connections to each other than to the rest of the network, are symbolized with different colors. Words, or nodes, with a larger number of connections are symbolized with a larger font. How might this mapped network help us to understand The Adventures of Sherlock Holmes? What themes from the text might we be able to glean from this visualization.
+
+## Conclusion
+Through this tutorial, you have been given a cursory exposure to various forms of digital mapping and their potential applications in the humanities. I hope that this has deepened your interest in the subject and that you have gleaned a few exciting possibilities for digital mapping in your own work.
