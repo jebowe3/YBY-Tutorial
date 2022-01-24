@@ -237,7 +237,7 @@ After running the code, you should see several new folders in the table of conte
 ![New Folders](images/new-contents.png)  
 **Figure 21**. New folders in Jupyter Notebook.
 
-First, create a new folder inside your desktop project folder called "assets" to hold these files. Then, click and open "csv" in Jupyter Notebook. Right click "adv-sherlock-places-geocoded.csv" and click "Download" in the dropdown menu as shown below. Place this file inside your newly created "assets" folder.
+First, notice the folder inside your desktop project folder called "assets" where we will save these files. Then, click and open "csv" in Jupyter Notebook. Right click "adv-sherlock-places-geocoded.csv" and click "Download" in the dropdown menu as shown below. Place this file inside your "assets" folder.
 
 ![Download CSV](images/download-csv.png)  
 **Figure 22**. Download the geocoded locations.
@@ -247,3 +247,21 @@ Now, follow the same process for the "adv-sherlock.gexf" file in the "gephi" fol
 Now, we are ready to map the locations our Python code has retrieved and geocoded from the text of The Adventures of Sherlock Holmes.
 
 ### Map Locations in The Adventures of Sherlock Holmes with QGIS
+Using the "adv-sherlock-places-geocoded.csv" file in QGIS, we will experiment with three different presentations of the locational frequency data to map Sherlock Holmes's sense of place: heat mapping, proportional circles, and point in polygon analysis using the "nations.geojson" file.
+
+First, open QGIS, choose Web > QuickMapServices > Search QMS (You may need to install the QuickMapServices Plugin first). Now, search for "Dark Matter" and add this tile service as your basemap.
+
+![Add Dark Matter Basemap](images/add-dm.png)
+**Figure 23**. Add Dark Matter Basemap.
+
+Second, add the "adv-sherlock-places-geocoded.csv" file as points. To do this, choose Layer > Add Layer > Add Delimited Text Layer. Then, a dialog box will open.
+
+![Add Delimited Text Layer - Step 1](images/add-dlt-layer-1.png)
+**Figure 24**. Add Delimited Text Layer - Step 1.
+
+In the dialog box, select the "adv-sherlock-places-geocoded.csv" file next to "File name". Next, under "Geometry Definition", choose "Point coordinates" and set "X field" as "lng" and "Y field" as "lat". Make sure that the "Geometry CRS" is EPSG:4326 and click "Add". You can see a completed dialog box below. After adding, you should see all the mentioned mappable locations from The Adventures of Sherlock Holmes plotted as points in the QGIS map window.
+
+![Add Delimited Text Layer - Step 2](images/add-dlt-layer-2.png)
+**Figure 25**. Add Delimited Text Layer - Step 2.
+
+Third, let's make these points appear as proportional circles. Find the layer in the "Layers" table of contents in the lower lefthand corner and right click. Select "Properties" and choose "Symbology" from the options at left. Instead of "Single symbol", choose "Graduated". For "Column", choose "frequency". For "Method", select "Size". Next to "Mode", choose "Natural Breaks (Jenks)" and click "Classify". Then, click "OK".
