@@ -20,7 +20,7 @@ Jay Bowen, Digital Scholarship and Publishing Studio, University of Iowa Librari
   - [Adding a Georeferenced Historic Basemap](#adding-a-georeferenced-historic-basemap)
 - [Leaflet JavaScript for Web Mapping](#leaflet-javascript-for-web-mapping)
   - [Export a GeoJSON File for Web Mapping](#export-a-geojson-file-for-web-mapping)
-  - [Download Atom-Live-Server Package](#download-atom-live-server-package)
+  - [Open Atom and Download Atom-Live-Server Package](#open-atom-and-download-atom-live-server-package)
   - [Add the Sherlock GeoJSON to a Web Map Using Atom](#add-the-sherlock-geojson-to-a-web-map-using-atom)
   - [Crowdsourced Web Mapping with Google Sheets](#crowdsourced-web-mapping-with-google-sheets)
 - [Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi](#text-analysis-geolocation-and-network-mapping-with-python-qgis-and-gephi)
@@ -123,7 +123,7 @@ Return to the map edit window, right click the points layer, and click "Export" 
 ![Export Sherlock Points](images/export-sherlock-points.png)  
 **Figure 09**. Export all of the Sherlock points.
 
-### Download Atom-Live-Server Package
+### Open Atom and Download Atom-Live-Server Package
 Now we are ready to open our "leaflet-map" folder and do some minor editing in Atom. Open the repository that you downloaded to your desktop. Locate the folder called "leaflet-map." Drag and drop this entire folder over the green Atom icon on your desktop. This should open all of the web map components within an Atom text edit session. In the bar at the left, open the file called "index.html" so that you can see all of the code behind the web map. Your screen should look like this:
 
 ![Editing in Atom](images/index-html-atom.png)  
