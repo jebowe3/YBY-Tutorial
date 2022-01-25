@@ -180,7 +180,7 @@ With a few slight changes to our index.html code and a JavaScript library called
 
 In Atom, open the googlesheet-index.html file and take a quick look at the code. We are going to point our browser to this html file instead of the index.html file we viewed previously.
 
-This time, run atom-live-server again, but add 'googlesheet-index.html' to the url in the browser address bar. You should see a similar map load in your browser, with one important distinction. Notice how the first entry in our Google Sheets document contains an image link in a column titled "images." If you go back to the map in atom-live-server, filter for The Five Orange Pips in the story filter and click on the marker in the city center for Lloyd's Register, you will notice that this popup contains the image from that web link.
+This time, run atom-live-server again, but add '/googlesheet-index.html' to the url in the browser address bar. You should see a similar map load in your browser, with one important distinction. Notice how the first entry in our Google Sheets document contains an image link in a column titled "images." If you go back to the map in atom-live-server, filter for The Five Orange Pips in the story filter and click on the marker in the city center for Lloyd's Register, you will notice that this popup contains the image from that web link.
 
 ![Popup with Image](images/popup-with-image.png)  
 **Figure 14**. A popup with an image.
