@@ -129,12 +129,14 @@ Now we are ready to open our "leaflet-map" folder and do some minor editing in A
 ![Editing in Atom](images/index-html-atom.png)  
 **Figure 10**. Editing in Atom.
 
-The first thing that you will want to do so that you can check your progress is to download an Atom package called "atom-live-server." From the option in the bar at the top, click "Atom" and "Preferences." From the options that appear on the left, choose "Install," type "atom-live-server" in the search bar, and click "Install" on the first result. On my screen in the example below, you will see "Uninstall" because I have already installed this package.
+The first thing that you will want to do so that you can check your progress is to download an Atom package called "atom-live-server." From the option in the bar at the top, click "Atom" and "Preferences." If you are using a Windows PC, click "File" and "Settings." From the options that appear on the left, choose "Install," type "atom-live-server" in the search bar, and click "Install" on the first result. On my screen in the example below, you will see "Uninstall" because I have already installed this package.
 
 ![Installing Atom-Live-Server](images/install-liveserver.png)  
 **Figure 11**. Installing atom-live-server.
 
 Now you can check the progress of edits to your web map with a locally hosted server. To test it out, click "Packages" from the options in the bar at the top. Select "atom-live-server" and "Start server." This will open the map in your web browser.
+
+*NOTE: While the map can be opened in any web browser, the code behind this map was developed in Firefox without conditional formatting for other web browsers. It will look best in Firefox.
 
 ![Initial Live Server Map](images/live-server-init-map.png)  
 **Figure 12**. The initial web map in atom-live-server.
@@ -268,7 +270,7 @@ In the dialog box, select the "adv-sherlock-places-geocoded.csv" file next to "F
 ![Add Delimited Text Layer - Step 2](images/add-dlt-layer-2.png)
 **Figure 25**. Add Delimited Text Layer - Step 2.
 
-Third, let's make these points appear as proportional circles. Find the layer in the "Layers" table of contents in the lower lefthand corner and right click. Select "Properties" and choose "Symbology" from the options at left. Instead of "Single symbol", choose "Graduated". For "Column", choose "frequency". For "Method", select "Size". Next to "Mode", choose "Natural Breaks (Jenks)" and click "Classify". Then, click "OK".
+Third, let's make these points appear as proportional circles. Find the layer in the "Layers" table of contents in the lower lefthand corner and right click. Select "Properties" and choose "Symbology" from the options at left. Instead of "Single symbol", choose "Graduated". For "Column", choose "frequency" (If using a Windows PC, you will look for "Value" instead of "Column"). For "Method", select "Size". Next to "Mode", choose "Natural Breaks (Jenks)" and click "Classify". Then, click "OK".
 
 ![Make Proportional Circles](images/make-prop-circles.png)
 **Figure 26**. Make Proportional Circles.
@@ -298,6 +300,8 @@ Now, navigate to Processing > Toolbox and search for a tool called "Join attribu
 Next, in the Layers table of contents, turn off every layer except the new "Joined layer". Right click this layer and choose "Open Attribute Table". Click the "Open field calculator" button. Check "Update existing field" and choose "frequency_sum" from the dropdown menu. In the expression box, type:
 
 if ("frequency_sum" is null, 0, "frequency_sum")
+
+*NOTE: You will actually want to type the expression above, rather than copy and paste. This will ensure that the quotation marks are correctly formatted.
 
 Click "OK". Next, click save edits and close the edit session by clicking the box that contains a pencil.
 
