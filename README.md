@@ -217,9 +217,7 @@ While you have made two maps that you can host locally on your computer, you may
 Now that you have seen some of the potential for JavaScript in interactive web mapping, let's take a look at how Python scripting can help us to analyze and map texts geographically and conceptually.
 
 ## Text Analysis, Geolocation, and Network Mapping with Python, QGIS, and Gephi
-If you foresee doing a lot of Python scripting in the future, it will be helpful to download [Anaconda Navigator](https://www.anaconda.com/products/individual) for setting up environments where you can test and run Python code inside a Jupyter Notebook file. For in-depth instructions on how to do this, [click this link](https://jebowe3.github.io/DH-Mapping/#download-anaconda-navigator).
-
-However, in this example, we will run a Jupyter Notebook file within a pre-established environment in a [GESIS Notebooks Binder](https://notebooks.gesis.org/binder/) in our web browser. You can open this by [clicking this link](https://notebooks.gesis.org/binder/v2/gh/jebowe3/Text-Analysis-Binder/HEAD).
+If you foresee doing a lot of Python scripting in the future, it will be helpful to download [Anaconda Navigator](https://www.anaconda.com/products/individual) for setting up environments where you can test and run Python code inside a Jupyter Notebook file. However, in this example, we will run a Jupyter Notebook file within a pre-established environment in a [GESIS Notebooks Binder](https://notebooks.gesis.org/binder/) in our web browser. You can open this by [clicking this link](https://notebooks.gesis.org/binder/v2/gh/jebowe3/Text-Analysis-Binder/HEAD).
 
 ### Open the ipynb File in Jupyter Notebook
 After the binder finishes loading in your browser, click and open the "place-analysis.ipynb" file in the menu on the left side of the screen.
